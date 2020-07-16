@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url(../fonts/Roboto-Regular.ttf)
+}
+
+@import 'variables';
+
+html {
+    font-size: $root-font-size;
+    font-family: $font-family;
+}
+
+body {
+    margin: 0;
+}
+
+p {
+    font-size: $paragraph-font-size;
+}
+
+.canvas {
+    height: 100vh;
+    width: 100vw;
+}
