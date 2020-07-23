@@ -1,16 +1,18 @@
 import { HelloWorld } from './js/HelloWorld'
-import { getCanvasContext } from './js/setup'
+import { setCanvasDimensions, getCanvasContext } from './js/setup'
 import Walker from './js/Walker'
 // import WebpackLogo from './images/webpack-logo.svg'
 import './styles/index.scss'
 
 // initialize canvas
+setCanvasDimensions()
 const ctx = getCanvasContext()
-let walkers = [new Walker(50, 50, ctx)]
+let walkers = [new Walker(1000, 500, ctx), new Walker(500, 500, ctx)]
+
 const draw = () => {
     walkers.forEach(walker => {
-        console.log(walker.isOut())
         if (!walker.isOut()) {
+            walker.velocity();
             walker.move();
             walker.draw();
         }
