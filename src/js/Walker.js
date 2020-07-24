@@ -1,10 +1,12 @@
+import { canvasCtx, noise } from './setup-canvas'
+
 class Walker {
-    constructor(x, y, ctx, noise) {
+    constructor(x, y) {
         this.x = x;
         this.y = y;
         this.px = x;
         this.py = y;
-        this.ctx = ctx
+        this.ctx = canvasCtx
         this.noise = noise
         this.width = 10;
         this.height = 10;

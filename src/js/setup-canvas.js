@@ -1,3 +1,5 @@
+import { Noise } from 'noisejs'
+
 export const getCanvasContext = () => {
     let canvas = document.getElementById("canvas")
     return canvas.getContext("2d")
@@ -8,3 +10,8 @@ export const setCanvasDimensions = () => {
     canvas.setAttribute('height', `${window.innerHeight}px`)
     canvas.setAttribute('width', `${window.innerWidth}px`)
 }
+
+setCanvasDimensions()
+
+export const canvasCtx = getCanvasContext()
+export const noise = new Noise(Math.random())

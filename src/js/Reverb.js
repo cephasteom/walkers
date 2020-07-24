@@ -1,14 +1,15 @@
-class Revern {
-	constructor(audioContext, pathToIr) {
+class Reverb {
+	constructor(audioContext) {
         this.ctx = audioContext;
-        this.pathToIr = pathToIr
-		this.reverb = this.ctx.createConvolver();
-		this.reverb.connect( this.ctx.destination );
+        this.reverb = this.ctx.createConvolver();
+        this.input = this.ctx.createGain()
+        this.input.connect( this.reverb );
+        this.input.gain.setValueAtTime(0.3, this.ctx.currentTime);
 		this._loadIR();
 	}
 	_loadIR() {
 		var irRRequest = new XMLHttpRequest();
-		irRRequest.open("GET", this.pathToIr, true);
+		irRRequest.open("GET", 'audio/minster1_000_ortf_48k.wav', true);
 		irRRequest.responseType = "arraybuffer";
 		irRRequest.onload = function() {
 			this.ctx.decodeAudioData( irRRequest.response, 
@@ -20,3 +21,5 @@ class Revern {
 		irRRequest.send();
 	}
 }
+
+export default Reverb;

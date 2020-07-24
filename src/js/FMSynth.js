@@ -1,18 +1,28 @@
 import Osc from './Osc';
+import { audioCtx, reverb } from './setup-audio'
 
 class FMSynth {
-	constructor(audioContext) {
-		this._ctx = audioContext;
+	constructor() {
+		this._ctx = audioCtx;
+        this._init()
+        this._setDefaultValues()
+    }
+    
+    _init() {
+		this._carrier = new Osc(this._ctx, 'sine', 440, 0);
+		this._modulator = new Osc(this._ctx, 'sine', 440, 0);
+		this._modulator.volume.connect(this._carrier.osc.frequency);
+		this._carrier.volume.connect(this._ctx.destination); // dry
+		// this._carrier.volume.connect(reverb.input); // wet
+    }
+    
+    _setDefaultValues() {
         this._freq = 200; 
         this._vol = 0.5;
 		this._carrRatio = 5; this._modRatio = 4; this._modAmp = 4;
 		this._a = 0.1; this._d = 0.1; this._s = 1; this._r = 1; this._sLevel = 0.5;
 		this._aMod = 0.1; this._dMod = 0.1; this._sMod = 1; this._rMod = 1; this._sLevelMod = 0.5;
-		this._carrier = new Osc(this._ctx, 'sine', 440, 0);
-		this._modulator = new Osc(this._ctx, 'sine', 440, 0);
-		this._modulator.volume.connect(this._carrier.osc.frequency);
-		this._carrier.volume.connect(this._ctx.destination); // Can change using connectTo() e.g. reverb
-	}
+    }
 
 	_setFreq(freq) {
 		this._freq = freq; // set global carrier _freq
@@ -102,3 +112,5 @@ class FMSynth {
 		this._vol = val;
 	}
 }
+
+export default FMSynth;

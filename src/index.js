@@ -1,15 +1,11 @@
-import { setCanvasDimensions, getCanvasContext } from './js/setup-canvas'
 import Walker from './js/Walker'
-import { Noise } from 'noisejs'
+import FMSynth from './js/FMSynth'
 import './styles/index.scss'
 
-setCanvasDimensions()
-const canvasCtx = getCanvasContext()
 
-var noise = new Noise(Math.random())
 let walkers = new Array(100)
                     .fill(null)
-                    .map(() => new Walker(window.innerWidth/2, window.innerHeight/2, canvasCtx, noise))
+                    .map(() => new Walker(window.innerWidth/2, window.innerHeight/2))
 
 const draw = () => {
     walkers.forEach(walker => {
@@ -23,4 +19,9 @@ const draw = () => {
     window.requestAnimationFrame(draw)
 }
 
-window.onload = () => window.requestAnimationFrame(draw)
+document.getElementById('canvas').addEventListener('click', () => {
+    let synth = new FMSynth()
+    synth.play(60, 80)
+
+    window.requestAnimationFrame(draw)
+})

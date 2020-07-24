@@ -6,3 +6,5 @@ class Osc {
         this.osc.connect(this.volume);
     };
 };
+
+export default Osc;

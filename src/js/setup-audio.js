@@ -1,4 +1,3 @@
-import ir from '../audio/minster1_000_ortf_48k.wav';
 import Reverb from './Reverb';
 
 const getAudioContext = () => {
@@ -7,5 +6,4 @@ const getAudioContext = () => {
 }
 
 export const audioCtx = getAudioContext()
-
-export const reverb = new Reverb(audioCtx, ir)
+export const reverb = new Reverb(audioCtx)
