@@ -1,5 +1,4 @@
 import Walker from './js/Walker'
-import FMSynth from './js/FMSynth'
 import './styles/index.scss'
 
 
@@ -12,7 +11,6 @@ const draw = () => {
         if (!walker.isOut()) {
             walker.velocity()
             walker.move()
-            // walker.sound()
             walker.draw()
         }
     });
@@ -20,8 +18,6 @@ const draw = () => {
 }
 
 document.getElementById('canvas').addEventListener('click', () => {
-    let synth = new FMSynth()
-    synth.play(60, 80)
 
     window.requestAnimationFrame(draw)
 })
