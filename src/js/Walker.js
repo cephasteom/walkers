@@ -36,6 +36,7 @@ class Walker {
         const { width, height, velocityX, velocityY } = this
         this.x += velocityX;
         this.y += velocityY;
+        // Nice! this is is worth pursuing
         // const direction = Math.random();
         // if (direction < 0.25) return this.y -= height; // up
         // if (direction < 0.5) return this.y += height; // down
@@ -45,6 +46,7 @@ class Walker {
     draw() {
         const { ctx, x, y, width, height, px, py } = this
         ctx.beginPath()
+        // Nice! also worth pursuing
         // ctx.arc(x, y, width, 0, Math.PI * 2, true);
         ctx.moveTo(px,py);
         ctx.lineTo(x,y);
