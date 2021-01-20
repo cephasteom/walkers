@@ -7,7 +7,6 @@ import { diffArray, medianArray, scale } from './js/utils'
 import { canvasCtx } from './js/setup-canvas'
 
 const nWalkers = 100
-const fps = 50
 let groups = [];
 let isAnimating = false;
 let animationFrame = null;
@@ -21,7 +20,6 @@ const createGroup = (x, y) => {
 }
 
 const draw = () => {
-    console.log('drawing')
     groups = groups
         .map(({walkers, synth}) => {
             if(walkers.every(walker => walker.isOut())) {
@@ -31,8 +29,7 @@ const draw = () => {
             walkers = walkers
                 .map(walker => {
                     if(walker.isOut()) return null;
-                    walker.velocity().move()
-                    walker.reColour().draw()
+                    walker.velocity().move().reColour().draw()
                     return walker;
                 })
                 .filter(walker => !!walker)
@@ -52,7 +49,6 @@ const draw = () => {
             return { walkers, synth }
         })
         .filter(group => !!group);
-    // setTimeout(() => animationFrame = window.requestAnimationFrame(draw), 1000 / fps)
     animationFrame = window.requestAnimationFrame(draw)
 }
 

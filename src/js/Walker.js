@@ -34,7 +34,7 @@ class Walker {
     }
     velocity () {
         const { noise } = this
-        let degree = 0.005
+        let degree = 0.0075
         this.velocityX += noise.simplex2(this.x * degree, this.y * degree);
         this.velocityY += noise.simplex2(this.y * degree, this.x * degree);
         return this
@@ -43,15 +43,9 @@ class Walker {
         const { width, height, velocityX, velocityY } = this
         this.x += velocityX;
         this.y += velocityY;
-        // Nice! this is is worth pursuing
-        // const direction = Math.random();
-        // if (direction < 0.25) return this.y -= height; // up
-        // if (direction < 0.5) return this.y += height; // down
-        // if (direction < 0.75) return this.x -= width; // left
-        // return this.x += width; // right
+        return this
     }
     reColour() {
-        // get the colour to random walk!!!!
         this.opacity = 1
         this.red = scale(0, window.innerWidth, 0, 255, this.x)
         this.blue = scale(0, window.innerWidth, 0, 255, this.y)
@@ -61,8 +55,6 @@ class Walker {
     draw() {
         const { ctx, x, y, width, height, px, py } = this
         ctx.beginPath()
-        // Nice! also worth pursuing
-        // ctx.arc(x, y, width, 0, Math.PI * 2, true);
         ctx.moveTo(px,py);
         ctx.lineTo(x,y);
         ctx.strokeStyle = this.colour
