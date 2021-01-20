@@ -4,11 +4,13 @@ import Walker from './js/Walker'
 import Synth from './js/Synth'
 import './styles/index.scss'
 import { diffArray, medianArray, scale } from './js/utils'
+import { canvasCtx } from './js/setup-canvas'
 
 const nWalkers = 100
 const fps = 50
 let groups = [];
 let isAnimating = false;
+let animationFrame = null;
 
 const createGroup = (x, y) => {
     let group = {
@@ -19,6 +21,7 @@ const createGroup = (x, y) => {
 }
 
 const draw = () => {
+    console.log('drawing')
     groups = groups
         .map(({walkers, synth}) => {
             if(walkers.every(walker => walker.isOut())) {
@@ -49,14 +52,22 @@ const draw = () => {
             return { walkers, synth }
         })
         .filter(group => !!group);
-    setTimeout(() => window.requestAnimationFrame(draw), 1000 / fps)
+    // setTimeout(() => animationFrame = window.requestAnimationFrame(draw), 1000 / fps)
+    animationFrame = window.requestAnimationFrame(draw)
 }
 
 document.getElementById('canvas').addEventListener('click', e => {
-
     createGroup(e.x, e.y)
     if(!isAnimating) {
-        window.requestAnimationFrame(draw)
+        animationFrame = window.requestAnimationFrame(draw)
         isAnimating = true
     }
+})
+
+document.getElementById('clear').addEventListener('click', e => {
+    window.cancelAnimationFrame(animationFrame);
+    groups.forEach(group => group.synth.release())
+    groups = []
+    canvasCtx.clearRect(0, 0, window.innerWidth, window.innerHeight)
+    isAnimating = false
 })

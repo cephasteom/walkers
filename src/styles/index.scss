@@ -19,7 +19,21 @@ p {
     font-size: $paragraph-font-size;
 }
 
-.canvas {
-    // height: 50vh;
-    // width: 50vw;
+#clear {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    border: 1px solid white;
+    background: black;
+    color: white;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    &:hover {
+        color: black;
+        background: white;
+    }
+    &:focus { outline: red }
 }
+
