@@ -14,7 +14,9 @@ class Walker {
         this.velocityX = (Math.random() * 4 - 2)
         this.velocityY = (Math.random() * 4 - 2)
         this.opacity = 1
-        this.colour = `rgba(255,255,255,${this.opacity})`
+        this.red = Math.round(Math.random() * 255)
+        this.blue = Math.round(Math.random() * 255)
+        this.colour = `rgba(${this.red},0,${this.blue},${this.opacity})`
         this.getCanvasDimensions()
         this.draw();
     }
@@ -29,7 +31,7 @@ class Walker {
     }
     velocity () {
         const { noise } = this
-        let degree = 0.0013
+        let degree = 0.0025
         this.velocityX += noise.simplex2(this.x * degree, this.y * degree);
         this.velocityY += noise.simplex2(this.y * degree, this.x * degree);
         return this
@@ -44,11 +46,10 @@ class Walker {
         // if (direction < 0.5) return this.y += height; // down
         // if (direction < 0.75) return this.x -= width; // left
         // return this.x += width; // right
-        return this
     }
     reColour() {
         this.opacity = 1
-        this.colour = `rgba(255,255,255,${this.opacity/4})`
+        this.colour = `rgba(${this.red},0,${this.blue},${this.opacity/4})`
         return this
     }
     draw() {

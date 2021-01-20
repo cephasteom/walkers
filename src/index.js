@@ -5,8 +5,8 @@ import Synth from './js/Synth'
 import './styles/index.scss'
 import { diffArray, medianArray, maxArray, scale } from './js/utils'
 
-const nWalkers = 75
-const fps = 60
+const nWalkers = 100
+const fps = 40
 let groups = [];
 let isAnimating = false;
 
@@ -28,7 +28,8 @@ const draw = () => {
             walkers = walkers
                 .map(walker => {
                     if(walker.isOut()) return null;
-                    walker.velocity().move().reColour().draw()
+                    walker.velocity().move()
+                    walker.reColour().draw()
                     return walker;
                 })
                 .filter(walker => !!walker)

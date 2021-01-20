@@ -9,7 +9,7 @@ class Synth {
         this.positionX = scale(0, window.innerWidth, -1, 1, this.x)
         this.positionY = scale(0, window.innerHeight, -1, 1, this.y)
         this.positionZ = 0
-        this.amp = -10
+        this.amp = -12.5
         this.partials = partials
         this.harmonicity = 1
         this.modulationIndex = 1
@@ -46,7 +46,7 @@ class Synth {
         this.synth.modulationIndex.rampTo(this.modulationIndex, 0.1)
     }
     setAmp(val) {
-        this.amp = scale(0, 1, -50, -10, val)
+        this.amp = scale(0, 1, -50, -12.5, val)
         this.synth.volume.rampTo(this.amp, (1/1000))
     }
     setPositionX(val) { this.panner.positionX.rampTo(val, 1) }
