@@ -32,6 +32,7 @@ class Walker {
         let degree = 0.005
         this.velocityX += noise.simplex2(this.x * degree, this.y * degree);
         this.velocityY += noise.simplex2(this.y * degree, this.x * degree);
+        return this
     }
     move() {
         const { width, height, velocityX, velocityY } = this
@@ -43,11 +44,10 @@ class Walker {
         // if (direction < 0.5) return this.y += height; // down
         // if (direction < 0.75) return this.x -= width; // left
         // return this.x += width; // right
+        return this
     }
     draw() {
         const { ctx, x, y, width, height, px, py } = this
-        
-        // line
         ctx.beginPath()
         // Nice! also worth pursuing
         // ctx.arc(x, y, width, 0, Math.PI * 2, true);
@@ -55,11 +55,9 @@ class Walker {
         ctx.lineTo(x,y);
         ctx.strokeStyle ='rgba(0,0,0,0.3)'
         ctx.stroke()
-
-        // sound
-
         this.px = x
         this.py = y
+        return this
     }
 }
 
