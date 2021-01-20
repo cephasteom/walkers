@@ -9,6 +9,7 @@ import { canvasCtx } from './js/setup-canvas'
 const nWalkers = 100
 let groups = [];
 let isAnimating = false;
+let instructionsIsVisible = true
 let animationFrame = null;
 
 const createGroup = (x, y) => {
@@ -52,13 +53,20 @@ const draw = () => {
     animationFrame = window.requestAnimationFrame(draw)
 }
 
-document.getElementById('canvas').addEventListener('click', e => {
+const handleClickEvent = (e) => {
+    if(instructionsIsVisible) {
+        document.getElementById('instructions').remove();
+        instructionsIsVisible = false
+    }
     createGroup(e.x, e.y)
     if(!isAnimating) {
         animationFrame = window.requestAnimationFrame(draw)
         isAnimating = true
     }
-})
+}
+
+document.getElementById('instructions').addEventListener('click', handleClickEvent)
+document.getElementById('canvas').addEventListener('click', handleClickEvent)
 
 document.getElementById('clear').addEventListener('click', e => {
     window.cancelAnimationFrame(animationFrame);
