@@ -40,7 +40,7 @@ class Walker {
         return this
     }
     move() {
-        const { width, height, velocityX, velocityY } = this
+        const { velocityX, velocityY } = this
         this.x += velocityX;
         this.y += velocityY;
         return this

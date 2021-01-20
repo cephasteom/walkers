@@ -29,6 +29,7 @@ p {
     padding: 0.5em 1em;
     border-radius: 5px;
     cursor: pointer;
+    user-select: none;
     transition: all 0.25s ease;
     &:hover {
         color: black;
