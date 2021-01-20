@@ -13,7 +13,8 @@ class Synth {
         this.partials = partials
         this.harmonicity = 1
         this.modulationIndex = 1
-        this.freq = scale(0, window.innerHeight, 1000, 100, y)
+        this.notes = ["d3", "e3", "f3", "g3", "a4", "c4", "d4", "e4", "f4", "g4","a5", "c5"]
+        this.note = this.notes[Math.round(scale(0, window.innerHeight, 11, 0, y))]
         this.init()
     }
     init() {
@@ -27,10 +28,10 @@ class Synth {
             modulationIndex: this.modulationIndex,
             harmonicity: this.harmonicity,
             modulation: { type: `sine${this.partials}` },
-            envelope: { attack: 1, release: 1 }
+            envelope: { attack: 0.5, release: 1 }
         }).connect(this.panner)
         this.synth.volume.value = this.amp
-        this.synth.triggerAttack(this.freq)
+        this.synth.triggerAttack(this.note)
     }
     setPartials(n) {
         this.partials = n

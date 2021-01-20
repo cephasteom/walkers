@@ -41,7 +41,7 @@ const draw = () => {
             let yMedian = medianArray(ys)
             let xMax = maxArray(xs)
             let yMax = maxArray(ys)
-            synth.setHarmonicity(scale(0, window.innerWidth, 1, 0.1, yDiff))
+            synth.setHarmonicity(scale(0, window.innerWidth, 1, 0.5, yDiff))
             synth.setModulationIndex(scale(0, window.innerHeight, 0, 10, xDiff))
             synth.setPositionX(scale(0, window.innerWidth, -1, 1, xMedian))
             synth.setPositionY(scale(0, window.innerHeight, -1, 1, yMedian))
