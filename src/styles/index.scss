@@ -1,3 +1,8 @@
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts'; 
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+// @import '~@fortawesome/fontawesome-free/scss/regular';
+
 @font-face {
     font-family: 'Roboto';
     src: url(../fonts/Roboto-Regular.ttf)
@@ -20,6 +25,7 @@ p {
 }
 
 #clear {
+    font-size: 1em;
     position: absolute;
     top: 1em;
     right: 1em;
@@ -38,3 +44,10 @@ p {
     &:focus { outline: red }
 }
 
+#close {
+    position: absolute;
+    top: 0.4em;
+    left: 0.5em;
+    color: white;
+    font-size: 2em;
+}
