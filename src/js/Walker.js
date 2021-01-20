@@ -29,7 +29,7 @@ class Walker {
     }
     velocity () {
         const { noise } = this
-        let degree = 0.005
+        let degree = 0.0013
         this.velocityX += noise.simplex2(this.x * degree, this.y * degree);
         this.velocityY += noise.simplex2(this.y * degree, this.x * degree);
         return this
