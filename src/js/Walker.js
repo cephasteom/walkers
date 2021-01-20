@@ -1,7 +1,5 @@
 import * as Tone from 'tone'
 import { canvasCtx, noise } from './setup-canvas'
-import { output } from './setup-audio'
-import { scale } from './utils'
 
 class Walker {
     constructor(x, y) {
@@ -15,6 +13,8 @@ class Walker {
         this.height = 10;
         this.velocityX = (Math.random() * 4 - 2)
         this.velocityY = (Math.random() * 4 - 2)
+        this.opacity = 1
+        this.colour = `rgba(255,255,255,${this.opacity})`
         this.getCanvasDimensions()
         this.draw();
     }
@@ -46,6 +46,11 @@ class Walker {
         // return this.x += width; // right
         return this
     }
+    reColour() {
+        this.opacity = 1
+        this.colour = `rgba(255,255,255,${this.opacity/4})`
+        return this
+    }
     draw() {
         const { ctx, x, y, width, height, px, py } = this
         ctx.beginPath()
@@ -53,7 +58,7 @@ class Walker {
         // ctx.arc(x, y, width, 0, Math.PI * 2, true);
         ctx.moveTo(px,py);
         ctx.lineTo(x,y);
-        ctx.strokeStyle ='rgba(0,0,0,0.3)'
+        ctx.strokeStyle = this.colour
         ctx.stroke()
         this.px = x
         this.py = y
