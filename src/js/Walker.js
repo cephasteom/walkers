@@ -4,10 +4,9 @@ import { output } from './setup-audio'
 import { scale } from './utils'
 
 class Walker {
-    constructor(x, y, n) {
+    constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.n = n; // nth partial
         this.px = x;
         this.py = y;
         this.ctx = canvasCtx
@@ -16,10 +15,8 @@ class Walker {
         this.height = 10;
         this.velocityX = (Math.random() * 4 - 2)
         this.velocityY = (Math.random() * 4 - 2)
-        this.freq = scale(0, window.innerHeight, 500, 100, this.y)
         this.getCanvasDimensions()
-        this.createSynth()
-        this.walk();
+        this.draw();
     }
     getCanvasDimensions() {
         let canvas = document.getElementById('canvas').getBoundingClientRect()
@@ -47,22 +44,7 @@ class Walker {
         // if (direction < 0.75) return this.x -= width; // left
         // return this.x += width; // right
     }
-    createSynth() {
-        this.synth = new Tone.MonoSynth({
-            oscillator: { type: "sine" },
-            envelope: { attack: 1, release: 1 }
-        }).connect(output)
-        this.synth.volume.value = -20
-        this.synth.triggerAttack(this.freq)
-    }
-    releaseSynth() {
-        this.synth.triggerRelease()
-        setTimeout(() => this.synth.dispose(), 1001)
-    }
-    modulate() {
-
-    }
-    walk() {
+    draw() {
         const { ctx, x, y, width, height, px, py } = this
         
         // line

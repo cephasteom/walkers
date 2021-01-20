@@ -2,36 +2,39 @@
 // Maybe use this as an example https://tonejs.github.io/examples/rampTo (see sources tab)
 
 import Walker from './js/Walker'
+import Synth from './js/Synth'
 import './styles/index.scss'
 
 
-let walkerGroups = [];
+let groups = [];
 let isAnimating = false;
 
-const createWalker = (x, y) => {
-    let group = new Array(1).fill(null).map(i => new Walker(x, y, i))
-    walkerGroups.push(group)
+const createGroup = (x, y) => {
+    let group = {
+        walkers: new Array(100).fill(null).map(i => new Walker(x, y)), 
+        synth: new Synth(x, y)
+    }
+    groups.push(group)
 }
 
 
 const draw = () => {
-    walkerGroups.forEach(group => {
-        group.forEach(walker => {
+    groups.forEach(({walkers, synth}) => {
+        walkers.forEach(walker => {
             if (!walker.isOut()) {
                 walker.velocity()
                 walker.move()
-                walker.walk()
-            } else {
-                walker.releaseSynth()
+                walker.draw()
             }
         })
+        if(walkers.every(walker => walker.isOut())) synth.release()
     });
     window.requestAnimationFrame(draw)
 }
 
 document.getElementById('canvas').addEventListener('click', e => {
 
-    createWalker(e.x, e.y)
+    createGroup(e.x, e.y)
     if(!isAnimating) {
         window.requestAnimationFrame(draw)
         isAnimating = true
