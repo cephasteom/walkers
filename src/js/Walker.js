@@ -1,5 +1,6 @@
 import * as Tone from 'tone'
 import { canvasCtx, noise } from './setup-canvas'
+import { scale } from './utils'
 
 class Walker {
     constructor(x, y) {
@@ -14,8 +15,10 @@ class Walker {
         this.velocityX = (Math.random() * 4 - 2)
         this.velocityY = (Math.random() * 4 - 2)
         this.opacity = 1
-        this.red = Math.round(Math.random() * 255)
-        this.blue = Math.round(Math.random() * 255)
+        // this.red = Math.round(Math.random() * 255)
+        // this.blue = Math.round(Math.random() * 255)
+        this.red = scale(0, window.innerWidth, 0, 255, this.x)
+        this.blue = scale(0, window.innerWidth, 0, 255, this.y)
         this.colour = `rgba(${this.red},0,${this.blue},${this.opacity})`
         this.getCanvasDimensions()
         this.draw();
@@ -31,7 +34,7 @@ class Walker {
     }
     velocity () {
         const { noise } = this
-        let degree = 0.0025
+        let degree = 0.005
         this.velocityX += noise.simplex2(this.x * degree, this.y * degree);
         this.velocityY += noise.simplex2(this.y * degree, this.x * degree);
         return this
@@ -48,7 +51,10 @@ class Walker {
         // return this.x += width; // right
     }
     reColour() {
+        // get the colour to random walk!!!!
         this.opacity = 1
+        this.red = scale(0, window.innerWidth, 0, 255, this.x)
+        this.blue = scale(0, window.innerWidth, 0, 255, this.y)
         this.colour = `rgba(${this.red},0,${this.blue},${this.opacity/4})`
         return this
     }

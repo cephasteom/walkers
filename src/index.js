@@ -3,10 +3,10 @@
 import Walker from './js/Walker'
 import Synth from './js/Synth'
 import './styles/index.scss'
-import { diffArray, medianArray, maxArray, scale } from './js/utils'
+import { diffArray, medianArray, scale } from './js/utils'
 
 const nWalkers = 100
-const fps = 40
+const fps = 50
 let groups = [];
 let isAnimating = false;
 
