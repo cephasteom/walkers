@@ -1,25 +1,28 @@
+// TODO: instructions notice. Clicking / pressing enter runs tone.start()
+// Maybe use this as an example https://tonejs.github.io/examples/rampTo (see sources tab)
+
 import Walker from './js/Walker'
 import './styles/index.scss'
 
 
-let walkers = [];
-
-const createWalker = (x, y) => {
-    let walker = new Array(100)
-                        .fill(null)
-                        .map(() => new Walker(x, y))
-    walkers.push(walker)
-}
-
+let walkerGroups = [];
 let isAnimating = false;
 
+const createWalker = (x, y) => {
+    let group = new Array(1).fill(null).map(i => new Walker(x, y, i))
+    walkerGroups.push(group)
+}
+
+
 const draw = () => {
-    walkers.forEach(walker => {
-        walker.forEach(strand => {
-            if (!strand.isOut()) {
-                strand.velocity()
-                strand.move()
-                strand.draw()
+    walkerGroups.forEach(group => {
+        group.forEach(walker => {
+            if (!walker.isOut()) {
+                walker.velocity()
+                walker.move()
+                walker.walk()
+            } else {
+                walker.releaseSynth()
             }
         })
     });
@@ -27,6 +30,7 @@ const draw = () => {
 }
 
 document.getElementById('canvas').addEventListener('click', e => {
+
     createWalker(e.x, e.y)
     if(!isAnimating) {
         window.requestAnimationFrame(draw)

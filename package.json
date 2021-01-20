@@ -46,6 +46,7 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
-    "noisejs": "^2.1.0"
+    "noisejs": "^2.1.0",
+    "tone": "^14.7.77"
   }
 }
