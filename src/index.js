@@ -5,7 +5,9 @@ import Synth from './js/Synth'
 import './styles/index.scss'
 import { diffArray, medianArray, scale } from './js/utils'
 import { canvasCtx } from './js/setup-canvas'
+import { Noise } from 'noisejs'
 
+let noise = new Noise(Math.random())
 const nWalkers = 100
 let groups = [];
 let isAnimating = false;
@@ -14,7 +16,7 @@ let animationFrame = null;
 
 const createGroup = (x, y) => {
     let group = {
-        walkers: new Array(nWalkers).fill(null).map(i => new Walker(x, y)), 
+        walkers: new Array(nWalkers).fill(null).map(i => new Walker(x, y, noise)), 
         synth: new Synth(x, y, 0)
     }
     groups.push(group)
@@ -74,4 +76,5 @@ document.getElementById('clear').addEventListener('click', e => {
     groups = []
     canvasCtx.clearRect(0, 0, window.innerWidth, window.innerHeight)
     isAnimating = false
+    noise = new Noise(Math.random())
 })

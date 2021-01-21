@@ -3,7 +3,7 @@ import { canvasCtx, noise } from './setup-canvas'
 import { scale } from './utils'
 
 class Walker {
-    constructor(x, y) {
+    constructor(x, y, noise) {
         this.x = x;
         this.y = y;
         this.px = x;
