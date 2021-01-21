@@ -1,25 +1,26 @@
-// TODO: instructions notice. Clicking / pressing enter runs tone.start()
+// TODO: auto mode
 
 import Walker from './js/Walker'
 import Synth from './js/Synth'
-import './styles/index.scss'
 import { diffArray, medianArray, scale } from './js/utils'
 import { canvasCtx } from './js/setup-canvas'
 import { Noise } from 'noisejs'
+import './styles/index.scss'
 
-let noise = new Noise(Math.random())
 const nWalkers = 100
 let groups = [];
 let isAnimating = false;
 let instructionsIsVisible = true
+let noise = new Noise(Math.random())
 let animationFrame = null;
+const clearBtn = document.getElementById('clear')
+const instructions = document.getElementById('instructions')
 
 const createGroup = (x, y) => {
-    let group = {
+    groups.push({
         walkers: new Array(nWalkers).fill(null).map(i => new Walker(x, y, noise)), 
         synth: new Synth(x, y, 0)
-    }
-    groups.push(group)
+    })
 }
 
 const draw = () => {
@@ -36,7 +37,7 @@ const draw = () => {
                     return walker;
                 })
                 .filter(walker => !!walker)
-            // Get data
+            // data
             let xs = walkers.map(walker => walker.x)
             let ys = walkers.map(walker => walker.y)
             let xDiff = diffArray(xs)
@@ -67,10 +68,10 @@ const handleClickEvent = (e) => {
     }
 }
 
-document.getElementById('instructions').addEventListener('click', handleClickEvent)
+instructions.addEventListener('click', handleClickEvent)
 document.getElementById('canvas').addEventListener('click', handleClickEvent)
 
-document.getElementById('clear').addEventListener('click', e => {
+clearBtn.addEventListener('click', e => {
     window.cancelAnimationFrame(animationFrame);
     groups.forEach(group => group.synth.release())
     groups = []

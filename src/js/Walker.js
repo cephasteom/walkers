@@ -15,8 +15,6 @@ class Walker {
         this.velocityX = (Math.random() * 4 - 2)
         this.velocityY = (Math.random() * 4 - 2)
         this.opacity = 1
-        // this.red = Math.round(Math.random() * 255)
-        // this.blue = Math.round(Math.random() * 255)
         this.red = scale(0, window.innerWidth, 0, 255, this.x)
         this.blue = scale(0, window.innerWidth, 0, 255, this.y)
         this.colour = `rgba(${this.red},0,${this.blue},${this.opacity})`
