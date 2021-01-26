@@ -54,6 +54,7 @@ class Synth {
     release() {
         this.synth.triggerRelease()
         setTimeout(() => this.synth.dispose(), 1001)
+        return null
     }
 }
 

@@ -18,6 +18,8 @@ class Walker {
         this.red = scale(0, window.innerWidth, 0, 255, this.x)
         this.blue = scale(0, window.innerWidth, 0, 255, this.y)
         this.colour = `rgba(${this.red},0,${this.blue},${this.opacity})`
+        this.out = false
+        this.collided = false
         this.getCanvasDimensions()
         this.draw();
     }
@@ -28,26 +30,34 @@ class Walker {
     }
     isOut() {
         const { x, y, canvasHeight, canvasWidth } = this
-        return (x < 0 || x > canvasWidth || y < 0 || y > canvasHeight);
+        this.out = (x < 0 || x > canvasWidth || y < 0 || y > canvasHeight);
+        return this.out
+    }
+    hasCollided(markers, groupI) {
+        this.collided = markers.some((marker, i) => (
+            Math.abs(this.x - marker.x) <= marker.radius 
+            && Math.abs(this.y - marker.y) <= marker.radius
+            && groupI !== i // don't collide with your own marker
+        ))
+        return this.collided
     }
     velocity () {
         const { noise } = this
-        let degree = 0.0075
+        let degree = 0.0015
         this.velocityX += noise.simplex2(this.x * degree, this.y * degree);
         this.velocityY += noise.simplex2(this.y * degree, this.x * degree);
         return this
     }
     move() {
-        const { velocityX, velocityY } = this
-        this.x += velocityX;
-        this.y += velocityY;
+        this.x += this.velocityX;
+        this.y += this.velocityY;
         return this
     }
     reColour() {
         this.opacity = 1
         this.red = scale(0, window.innerWidth, 0, 255, this.x)
         this.blue = scale(0, window.innerWidth, 0, 255, this.y)
-        this.colour = `rgba(${this.red},0,${this.blue},${this.opacity/4})`
+        this.colour = `rgba(${this.red},0,${this.blue},${this.opacity})`
         return this
     }
     draw() {
