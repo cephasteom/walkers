@@ -15,6 +15,7 @@ let noise = new Noise(Math.random())
 let animationFrame = null;
 const clearBtn = document.getElementById('clear')
 const instructions = document.getElementById('instructions')
+const closeBtn = document.getElementById('close')
 
 const createGroup = (x, y) => {
     groups.push({
@@ -79,3 +80,8 @@ clearBtn.addEventListener('click', e => {
     isAnimating = false
     noise = new Noise(Math.random())
 })
+
+const params = new URLSearchParams(window.location.search);
+if(!params.get('hideClose')) {
+    closeBtn.classList.remove('hidden')
+}
