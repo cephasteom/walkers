@@ -57,10 +57,11 @@ p {
     cursor: pointer;
     position: absolute;
     text-align: center;
-    width: 100%;
     color: white;
     font-size: 1em;
     top: calc(49% - 1em);
+    width: calc(100% - 2em);
+    margin: 1em;
 }
 
 .hidden {
