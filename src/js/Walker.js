@@ -10,14 +10,10 @@ class Walker {
         this.py = y;
         this.ctx = canvasCtx
         this.noise = noise
-        this.width = 10;
-        this.height = 10;
-        this.velocityX = (Math.random() * 4 - 2)
-        this.velocityY = (Math.random() * 4 - 2)
-        this.opacity = 1
-        this.red = scale(0, window.innerWidth, 0, 255, this.x)
-        this.blue = scale(0, window.innerWidth, 0, 255, this.y)
-        this.colour = `rgba(${this.red},0,${this.blue},${this.opacity})`
+        this.velocityX = (Math.random() * 2 - 2)
+        this.velocityY = (Math.random() * 2 - 2)
+        this.opacity = Math.random() * 0.1
+        this.colour = `rgba(255,255,255,${this.opacity})`
         this.getCanvasDimensions()
         this.draw();
     }
@@ -32,7 +28,7 @@ class Walker {
     }
     velocity () {
         const { noise } = this
-        let degree = 0.0075
+        let degree = 0.0025
         this.velocityX += noise.simplex2(this.x * degree, this.y * degree);
         this.velocityY += noise.simplex2(this.y * degree, this.x * degree);
         return this
@@ -45,9 +41,9 @@ class Walker {
     }
     reColour() {
         this.opacity = 1
-        this.red = scale(0, window.innerWidth, 0, 255, this.x)
-        this.blue = scale(0, window.innerWidth, 0, 255, this.y)
-        this.colour = `rgba(${this.red},0,${this.blue},${this.opacity/4})`
+        // this.red = scale(0, window.innerWidth, 0, 255, this.x)
+        // this.blue = scale(0, window.innerWidth, 0, 255, this.y)
+        // this.colour = `rgba(${this.red},0,${this.blue},${this.opacity/4})`
         return this
     }
     draw() {
