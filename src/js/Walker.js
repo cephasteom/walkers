@@ -1,6 +1,4 @@
-import * as Tone from 'tone'
-import { canvasCtx, noise } from './setup-canvas'
-import { scale } from './utils'
+import { canvasCtx } from './setup-canvas'
 
 class Walker {
     constructor(x, y, noise) {
